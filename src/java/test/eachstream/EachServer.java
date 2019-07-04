@@ -45,14 +45,14 @@ public class EachServer {
 	static class GreeterImpl extends CalculateImplBase{
 		
 		@Override
-		public StreamObserver<Value> getResult(StreamObserver<Result> responseObserver){//参数对应了客户端的responseObserver
+		public StreamObserver<Value> getResult(StreamObserver<Result> responseObserver){//鍙傛暟瀵瑰簲浜嗗鎴风鐨剅esponseObserver
 			return new StreamObserver<Value>() {
 
 				private int sum=0;
 				private int cnt=0;
 				private double avg;
 				@Override
-				public void onCompleted() {//返回给客户端
+				public void onCompleted() {//杩斿洖缁欏鎴风
 		
 					responseObserver.onCompleted();
 				}
@@ -64,7 +64,7 @@ public class EachServer {
 				}
 
 				@Override
-				public void onNext(Value arg0) {//接受客户端发送的参数
+				public void onNext(Value arg0) {//鎺ュ彈瀹㈡埛绔殑鍙傛暟
 					// TODO Auto-generated method stub
 					sum+=arg0.getValue();
 					cnt++;

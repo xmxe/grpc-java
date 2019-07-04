@@ -30,10 +30,10 @@ public class StreamClient {
 
     private ManagedChannel managedChannel;
 
-    //·şÎñ´æ¸ù£¬ÓÃÓÚ¿Í»§¶Ë±¾µØµ÷ÓÃ
+    //æœåŠ¡å­˜æ ¹ï¼Œç”¨äºå®¢æˆ·ç«¯æœ¬åœ°è°ƒç”¨
     //private AdditionServiceGrpc.AdditionServiceBlockingStub additionServiceBlockingStub;
 
-    //ÕâÀïÓÃÒì²½ÇëÇó´æ¸ù
+    //è¿™é‡Œç”¨å¼‚æ­¥è¯·æ±‚å­˜æ ¹
     private AdditionServiceGrpc.AdditionServiceStub additionServiceStub;
 
     public StreamClient(String host, int port) {
@@ -53,15 +53,15 @@ public class StreamClient {
 
     public void getResult(final CallBack callBack, List<Integer> nums){
 
-        //ÅĞ¶Ïµ÷ÓÃ×´Ì¬¡£ÔÚÄÚ²¿ÀàÖĞ±»·ÃÎÊ£¬ĞèÒª¼ÓfinalĞŞÊÎ
+        //åˆ¤æ–­è°ƒç”¨çŠ¶æ€ã€‚åœ¨å†…éƒ¨ç±»ä¸­è¢«è®¿é—®ï¼Œéœ€è¦åŠ finalä¿®é¥°
         final CountDownLatch countDownLatch = new CountDownLatch(1);
 
         StreamObserver<Result> responseObserver = new StreamObserver<Result>() {
             public void onNext(Result result) {
-                //¾²Ì¬·½·¨»Øµ÷
+                //é™æ€æ–¹æ³•å›è°ƒ
                 CallBack.callBackStatic(result);
 
-                //ÊµÀı·½·¨»Øµ÷
+                //å®ä¾‹æ–¹æ³•å›è°ƒ
                 //callBack.setResult(result);
                 //callBack.callBackInstance();
             }
@@ -78,22 +78,22 @@ public class StreamClient {
 
         };
 
-        StreamObserver<Value> requestObserver = additionServiceStub.getResult(responseObserver);//·¢ËÍ¸ø·şÎñ¶Ë
+        StreamObserver<Value> requestObserver = additionServiceStub.getResult(responseObserver);//å‘é€ç»™æœåŠ¡ç«¯
 
         for(int i=0;i<nums.size();i++){
             Value value = Value.newBuilder().setValue(nums.get(i)).build();
             requestObserver.onNext(value);
 
-            //ÅĞ¶Ïµ÷ÓÃ½áÊø×´Ì¬¡£Èç¹ûÕû¸öµ÷ÓÃÒÑ¾­½áÊø£¬¼ÌĞø·¢ËÍÊı¾İ²»»á±¨´í£¬µ«ÊÇ»á±»ÉáÆú
+            //åˆ¤æ–­è°ƒç”¨ç»“æŸçŠ¶æ€ã€‚å¦‚æœæ•´ä¸ªè°ƒç”¨å·²ç»ç»“æŸï¼Œç»§ç»­å‘é€æ•°æ®ä¸ä¼šæŠ¥é”™ï¼Œä½†æ˜¯ä¼šè¢«èˆå¼ƒ
           /*  if(countDownLatch.getCount() == 0){
                 return;
             }*/
         }
-        //Òì²½ÇëÇó£¬ÎŞ·¨È·±£onNextÓëonCompleteµÄÍê³ÉÏÈºóË³Ğò
+        //å¼‚æ­¥è¯·æ±‚ï¼Œæ— æ³•ç¡®ä¿onNextä¸onCompleteçš„å®Œæˆå…ˆåé¡ºåº
         requestObserver.onCompleted();
 
         try {
-            //Èç¹ûÔÚ¹æ¶¨Ê±¼äÄÚÃ»ÓĞÇëÇóÍê£¬ÔòÈÃ³ÌĞòÍ£Ö¹
+            //å¦‚æœåœ¨è§„å®šæ—¶é—´å†…æ²¡æœ‰è¯·æ±‚å®Œï¼Œåˆ™è®©ç¨‹åºåœæ­¢Ö¹
             if(!countDownLatch.await(5,TimeUnit.MINUTES)){
             	System.out.println("not complete in time");
             }
@@ -110,15 +110,15 @@ public class StreamClient {
 
         StreamClient additionClient = new StreamClient(DEFAULT_HOST,DEFAULT_PORT);
 
-        //ÓÃÓÚÊµÀı·½·¨»Øµ÷
+        //ç”¨äºå®ä¾‹æ–¹æ³•å›è°ƒ
         CallBack callBack = new CallBack();
 
-        //Éú³ÉvalueÖµ
+        //ç”Ÿæˆvalueå€¼Öµ
         List<Integer> list = new ArrayList<Integer>();
         Random random = new Random();
 
         for(int i=0; i<VALUE_NUM; i++){
-            //Ëæ»úÊı·ûºÏ 0-VALUE_UPPER_BOUND ¾ùÔÈ·Ö²¼
+            //éšæœºæ•°ç¬¦åˆ 0-VALUE_UPPER_BOUND å‡åŒ€åˆ†å¸ƒ
             int value = random.nextInt(VALUE_UPPER_BOUND);
 
             System.out.println(i + ":" + value);

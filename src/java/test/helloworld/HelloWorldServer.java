@@ -45,8 +45,8 @@ public class HelloWorldServer {
 		public void sayHello(HelloRequest request,StreamObserver<HelloReply> responseObserver){
 			System.err.println("service:"+request.getName());
 			HelloReply reply = HelloReply.newBuilder().setMessage(("hello:"+request.getName())).build();
-			responseObserver.onNext(reply);//Ïò¿Í»§¶Ë·µ»Ø½á¹û
-			responseObserver.onCompleted();//¸æËß¿Í»§¶Ëµ÷ÓÃ½áÊø
+			responseObserver.onNext(reply);//å‘å®¢æˆ·ç«¯è¿”å›ç»“æœ
+			responseObserver.onCompleted();//å‘Šè¯‰å®¢æˆ·ç«¯è°ƒç”¨ç»“æŸ
 		}
 	}
 }
