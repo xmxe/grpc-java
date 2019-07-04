@@ -25,5 +25,8 @@ message LightModel{
 }
 
 service ReadRaw {
-  rpc readRawValuesModel (Request) returns (LightModelList) {}
+  rpc readRawValuesModel (stream Request) returns (LightModelList) {}
 }
+// protoc -I=F:\zz\grpc-java\src\resources\proto --java_out=F:\zz\grpc-java\src\java F:\zz\grpc-java\src\resources\proto\golden.proto
+// protoc -I=F:\zz\grpc-java\src\resources\proto --plugin=protoc-gen-grpc-java=F:\protoc\bin\protoc-gen-grpc-java-1.10.0-windows-x86_64.exe --grpc-java_out=F:\zz\grpc-java\src\java F:\zz\grpc-java\src\resources\proto\golden.proto
+
