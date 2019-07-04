@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+option java_multiple_files = false;
+option java_package = "com.grpc.eachstream";
+option java_outer_classname = "EachStreamProto";
+
+package eachstream;
+
+service Calculate {
+  rpc getResult (stream Value) returns (stream Result) {}
+}
+ 
+message Value {
+  int32 value = 1;
+}
+ 
+message Result {
+  int32 sum = 1;
+  int32 cnt = 2;
+  double avg = 3;
+}
+// protoc -I=F:\zz\grpc-java\src\resources\proto --java_out=F:\zz\grpc-java\src\java F:\zz\grpc-java\src\resources\proto\eachstream.proto
+// protoc -I=F:\zz\grpc-java\src\resources\proto --plugin=protoc-gen-grpc-java=F:\protoc\bin\protoc-gen-grpc-java-1.10.0-windows-x86_64.exe --grpc-java_out=F:\zz\grpc-java\src\java F:\zz\grpc-java\src\resources\proto\eachstream.proto

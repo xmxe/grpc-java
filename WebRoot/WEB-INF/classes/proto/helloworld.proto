@@ -1,26 +1,26 @@
 syntax = "proto3";
 
-option java_multiple_files = true;
+option java_multiple_files = true;//true生成多个文件,false可以将类都生成在一个文件中,默认false
 option java_package = "com.grpc.helloworld";
 option java_outer_classname = "HelloWorldProto";
 
-//option objc_class_prefix = "HLW";
-
+//import "google/protobuf/any.proto";
 
 package helloworld;
 
-// The greeting service definition.
+//定义服务
 service Greeter {
-  // Sends a greeting
   rpc SayHello (HelloRequest) returns (HelloReply) {}
 }
 
-// 
+
 message HelloRequest {
-  string name = 1;
+  string name = 1;//客户端请求的参数 '1'不是赋值 类似于数据库中的主键
 }
 
-// 
 message HelloReply {
-  string message = 1;
+  string message = 1;//服务端返回的内容
+  //google.protobuf.Any data = 1;
 }
+// protoc -I=F:\zz\grpc-java\src\resources\proto(.proto文件所在目录) --java_out=F:\zz\grpc-java\src\java(java文件生成目录) F:\zz\grpc-java\src\resources\proto\helloworld.proto(.proto文件)
+// protoc -I=F:\zz\grpc-java\src\resources\proto --plugin=protoc-gen-grpc-java=F:\protoc\bin\protoc-gen-grpc-java-1.10.0-windows-x86_64.exe --grpc-java_out=F:\zz\grpc-java\src\java F:\zz\grpc-java\src\resources\proto\helloworld.proto

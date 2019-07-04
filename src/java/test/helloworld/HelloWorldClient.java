@@ -1,4 +1,4 @@
-package test;
+package test.helloworld;
 
 import java.util.concurrent.TimeUnit;
 
@@ -32,12 +32,10 @@ public class HelloWorldClient {
 	}
 	public static void main(String[] args) throws Exception {
 		HelloWorldClient client = new HelloWorldClient("127.0.0.1", 8851);
-		try {
-			
-			  String user = "world"; if (args.length > 0) { user = args[0]; }
-			  client.greet(user);
-			 
-			/* for(int i = 0;i<5;i++){ client.greet("world:"+i); } */
+		try {						 
+			 for(int i = 0;i<5;i++){ 
+				 client.greet("world:"+i); 
+			 } 
 		    } finally {
 		      client.shutdown();
 		    }
