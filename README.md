@@ -8,4 +8,4 @@
 protoc -I=F:\zz\grpc\src\resources\proto(.proto文件所在目录) --java_out=F:\zz\grpc\src\java(java文件生成目录) F:\zz\grpc\src\resources\proto\helloworld.proto(.proto文件)  
 protoc -I=F:\zz\grpc\src\resources\proto --plugin=protoc-gen-grpc-java=F:\protoc\bin\protoc-gen-grpc-java-1.10.0-windows-x86_64.exe --grpc-java_out=F:\zz\grpc\src\java F:\zz\grpc\src\resources\proto\helloworld.proto
   ### 注意
-- 版本不一致 神坑~ protoc.exe要与protobuf-java版本一致
+- 版本不一致 神坑~ protoc.exe要与protobuf-java.jar版本一致
