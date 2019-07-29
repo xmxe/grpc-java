@@ -8,9 +8,38 @@ import java.io.Reader;
 
 public class RuntimeExec {
 	
+	/**
+	 * 在单独的进程中执行指定的字符串命令
+	 * @param args
+	 * @throws Exception 
+	 */
+	public static void execPython(String args) throws Exception {
+		args = "python "+args;
+		String[] cmdarray = new String[] {"cmd","/c",args};
+		execPython(cmdarray);
+	}
+	
+	/**
+	 * 在单独的进程中执行指定的命令和变量
+	 * @param args
+	 * @throws Exception 
+	 */
+	public static void execPython(String[] args) throws Exception {
+
+		Process process = Runtime.getRuntime().exec(args);
+		printMessage(process.getInputStream());
+		printMessage(process.getErrorStream());
+		int value = process.waitFor();
+		if (value == 0) {
+			System.out.println("程序正常执行");
+		} else {
+			System.err.println("程序执行出现异常");
+		}
+
+	}
 
 	/**
-	 * 在单独的进程中执行指定命令和变量
+	 * 在单独的进程中执行指定命令和变量(带执行路径)
 	 * @param args 参数
 	 * @param path 路径
 	 * @throws Exception 
@@ -40,7 +69,7 @@ public class RuntimeExec {
 	
 	
 	/**
-	 * 在指定环境的独立进程中指定命令和变量
+	 * 在指定环境的独立进程中指定命令和变量(未设置环境变量)
 	 * @param arg0
 	 * @throws Exception
 	 */
@@ -68,6 +97,7 @@ public class RuntimeExec {
 		}
 		
 	}	
+	
 	
 	
 	
