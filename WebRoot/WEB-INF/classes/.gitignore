@@ -2,3 +2,6 @@
 /entity/
 /proto/
 /test/
+/runtime/
+/util/
+/util.properties
