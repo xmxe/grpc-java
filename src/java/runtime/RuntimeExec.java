@@ -11,9 +11,8 @@ public class RuntimeExec {
 	/**
 	 * 在单独的进程中执行指定的字符串命令
 	 * @param args
-	 * @throws Exception 
 	 */
-	public static void execPython(String args) throws Exception {
+	public static void execPython(String args) {
 		args = "python "+args;
 		String[] cmdarray = new String[] {"cmd","/c",args};
 		execPython(cmdarray);
@@ -21,30 +20,25 @@ public class RuntimeExec {
 	
 	/**
 	 * 在单独的进程中执行指定的命令和变量
-	 * @param args
-	 * @throws Exception 
+	 * @param args 执行参数
+	 * 
 	 */
-	public static void execPython(String[] args) throws Exception {
-
-		Process process = Runtime.getRuntime().exec(args);
-		printMessage(process.getInputStream());
-		printMessage(process.getErrorStream());
-		int value = process.waitFor();
-		if (value == 0) {
-			System.out.println("程序正常执行");
-		} else {
-			System.err.println("程序执行出现异常");
+	public static void execPython(String[] args)  {
+		try {
+			Process process = Runtime.getRuntime().exec(args);
+			execResult(process);
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
 
 	}
 
 	/**
 	 * 在单独的进程中执行指定命令和变量(带执行路径)
-	 * @param args 参数
+	 * @param args 执行参数
 	 * @param path 路径
-	 * @throws Exception 
 	 */
-	public static void execPython(String args,String path) throws Exception{
+	public static void execPython(String args,String path) {
 		if(args.contains(" ")){
 			args = args.replaceAll("\\s+", " ");	//修正多余空格保留1个
 		}
@@ -53,27 +47,24 @@ public class RuntimeExec {
 		cmdarray[0] = path+"\\python.exe";
 		for(int i =0;i < arg.length;i++){
 			cmdarray[1+i] = arg[i];
+		}		
+		//String[] cmdarray = new String[]{"C:\\Program Files\\Python37\\python.exe",args};
+		try {
+			Process process = Runtime.getRuntime().exec(cmdarray);
+			execResult(process);
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
 		
-		//String[] cmdarray = new String[]{"C:\\Program Files\\Python37\\python.exe",args};
-		Process process = Runtime.getRuntime().exec(cmdarray);
-		printMessage(process.getInputStream());
-		printMessage(process.getErrorStream());
-		int value = process.waitFor();
-		if(value == 0){
-			System.out.println("程序正常执行");
-		}else{
-			System.err.println("程序执行出现异常");
-		}
 	}
 	
 	
 	/**
-	 * 在指定环境的独立进程中指定命令和变量(未设置环境变量)
-	 * @param arg0
-	 * @throws Exception
+	 * 在指定环境的独立进程中执行命令和变量(未设置环境变量)
+	 * @param args 执行参数
+	 * @param path 路径
 	 */
-	public static void execPython1(String args,String path) throws Exception{
+	public static void execPython1(String args,String path) {
 		String[] envp = new String[]{"path="+path};
 		if(args.contains(" ")){
 			args = args.replaceAll("\\s+", " ");	//修正多余空格保留1个			
@@ -85,21 +76,32 @@ public class RuntimeExec {
 			if(i ==0 ) arg[i] = "python "+arg[i];
 			cmdarray[2+i] = arg[i];
 		}		
-		//String[] cmdarray = new String[]{"cmd","/c","python C:\\Users\\admin\\Desktop\\helloworld.py","1","2"};
-		Process process = Runtime.getRuntime().exec(cmdarray,envp);
-		printMessage(process.getInputStream());
-		printMessage(process.getErrorStream());
-		int value = process.waitFor();
-		if(value == 0){
-			System.out.println("程序正常执行");
-		}else{
-			System.err.println("程序执行出现异常");
+		//String[] cmdarray = new String[]{"cmd","/c","python C:\\Users\\admin\\Desktop\\helloworld.py","1","2"};		
+		try {
+			Process process = Runtime.getRuntime().exec(cmdarray,envp);
+			execResult(process);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		
+				
 	}	
 	
 	
-	
+	public static void execResult(Process process) {
+		printMessage(process.getInputStream());
+		printMessage(process.getErrorStream());
+		int value = 1;
+		try {
+			value = process.waitFor();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		if(value == 0)
+			System.out.println("程序正常执行");
+		else
+			System.err.println("程序执行出现异常");
+		
+	}
 	
 	/**
 	 * 处理缓冲区信息，避免阻塞
