@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option java_multiple_files = false;
+option java_package = "com.grpc.golden";
+option java_outer_classname = "GoldenProto";
+
+
+package golden;
+
+message LightModelList {
+  repeated LightModel lightmodel = 1;
+}
+message Request {
+  string startTime = 1;
+  string endTime = 2;
+  string real_tag = 3;
+}
+message LightModel{
+	string tagName = 1;
+	string tagTime = 2;
+	string tagValue = 3;
+	bool isGood = 4;
+	int32 quality = 5;
+	bool setps = 6;
+}
+
+service ReadRaw {
+  rpc readRawValuesModel (stream Request) returns (LightModelList) {}
+}
+// protoc -I=F:\zz\grpc-java\src\resources\proto --java_out=F:\zz\grpc-java\src\java F:\zz\grpc-java\src\resources\proto\golden.proto
+// protoc -I=F:\zz\grpc-java\src\resources\proto --plugin=protoc-gen-grpc-java=F:\protoc\bin\protoc-gen-grpc-java-1.10.0-windows-x86_64.exe --grpc-java_out=F:\zz\grpc-java\src\java F:\zz\grpc-java\src\resources\proto\golden.proto
+

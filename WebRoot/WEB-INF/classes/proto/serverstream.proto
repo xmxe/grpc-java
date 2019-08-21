@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option java_multiple_files = true;//true生成多个文件,false可以将类都生成在一个文件中,默认false
+option java_package = "com.grpc.serverstream";
+option java_outer_classname = "ServerStreamProto";
+
+//流式服务端
+package serverstream;
+
+service NameService {
+  rpc getIpByName (Name) returns (stream IP) {}
+}
+ 
+message Name {
+  string name = 1;
+}
+ 
+message IP {
+  string IP = 1;
+}
+// protoc -I=F:\zz\grpc-java\src\resources\proto --java_out=F:\zz\grpc-java\src\java F:\zz\grpc-java\src\resources\proto\serverstream.proto
+// protoc -I=F:\zz\grpc-java\src\resources\proto --plugin=protoc-gen-grpc-java=F:\protoc\bin\protoc-gen-grpc-java-1.10.0-windows-x86_64.exe --grpc-java_out=F:\zz\grpc-java\src\java F:\zz\grpc-java\src\resources\proto\serverstream.proto
