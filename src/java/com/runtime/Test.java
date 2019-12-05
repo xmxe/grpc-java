@@ -1,7 +1,7 @@
-package test;
+package com.runtime;
 
-import runtime.RuntimeExec;
-import util.PropertiesUtil;
+import com.runtime.RuntimeExec;
+import com.util.PropertiesUtil;
 
 public class Test {
 

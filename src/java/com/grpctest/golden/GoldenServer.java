@@ -1,4 +1,4 @@
-package test.golden;
+package com.grpctest.golden;
 
 import java.io.IOException;
 import java.text.DateFormat;

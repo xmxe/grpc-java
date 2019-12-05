@@ -1,4 +1,4 @@
-package entity;
+package com.entity;
 
 import com.grpc.serverstream.IP;
 import com.grpc.serverstream.Name;

@@ -1,4 +1,4 @@
-package test.serverstream;
+package com.grpctest.serverstream;
 
 import java.util.ArrayList;
 import java.util.Iterator;

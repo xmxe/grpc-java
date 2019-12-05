@@ -1,4 +1,4 @@
-package test.eachstream;
+package com.grpctest.eachstream;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package test.serverstream;
+package com.grpctest.serverstream;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import com.grpc.serverstream.IP;
 import com.grpc.serverstream.Name;
 import com.grpc.serverstream.NameServiceGrpc.NameServiceImplBase;
 
-import entity.DataType;
+import com.entity.DataType;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;

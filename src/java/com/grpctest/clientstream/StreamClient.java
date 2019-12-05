@@ -1,4 +1,4 @@
-package test.clientstream;
+package com.grpctest.clientstream;
 
 import java.util.ArrayList;
 import java.util.List;

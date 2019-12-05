@@ -1,4 +1,4 @@
-package test.helloworld;
+package com.grpctest.helloworld;
 
 import java.util.concurrent.TimeUnit;
 

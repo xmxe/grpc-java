@@ -1,4 +1,4 @@
-package test.golden;
+package com.grpctest.golden;
 
 import java.util.ArrayList;
 import java.util.List;

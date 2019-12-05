@@ -1,16 +1,16 @@
-package test.clientstream;
+package com.grpctest.eachstream;
 
 import java.io.IOException;
 
-import com.grpc.clientstream.AdditionServiceGrpc.AdditionServiceImplBase;
-import com.grpc.clientstream.Result;
-import com.grpc.clientstream.Value;
+import com.grpc.eachstream.CalculateGrpc.CalculateImplBase;
+import com.grpc.eachstream.EachStreamProto.Result;
+import com.grpc.eachstream.EachStreamProto.Value;
 
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
 
-public class StreamServer {
+public class EachServer {
 	private int port = 8851;
 	private Server server;
 	public void start() throws IOException{
@@ -20,7 +20,7 @@ public class StreamServer {
 			@Override
 			public void run(){
 				System.out.println("**** shutting down gRPC server since JVM is shutting down..");
-				StreamServer.this.stop();
+				EachServer.this.stop();
 				System.out.println("*** server shutdown");
 			}
 		});
@@ -38,11 +38,11 @@ public class StreamServer {
 	}
 	public static void main(String[] args) throws InterruptedException, IOException {
 		System.out.println("new server");
-		final StreamServer server = new StreamServer();
+		final EachServer server = new EachServer();
 		server.start();
 		server.blockUtilShutdown();
 	}
-	static class GreeterImpl extends AdditionServiceImplBase{
+	static class GreeterImpl extends CalculateImplBase{
 		
 		@Override
 		public StreamObserver<Value> getResult(StreamObserver<Result> responseObserver){//参数对应了客户端的responseObserver
@@ -53,10 +53,7 @@ public class StreamServer {
 				private double avg;
 				@Override
 				public void onCompleted() {//返回给客户端
-					// TODO Auto-generated method stub
-					avg =1.0*sum/cnt;
-					System.out.println(sum);System.out.println(cnt);System.out.println(avg);
-					responseObserver.onNext(Result.newBuilder().setSum(sum).setCnt(cnt).setAvg(avg).build());
+		
 					responseObserver.onCompleted();
 				}
 
@@ -71,7 +68,12 @@ public class StreamServer {
 					// TODO Auto-generated method stub
 					sum+=arg0.getValue();
 					cnt++;
-					System.out.println(sum);System.out.println(cnt);System.out.println(avg);
+					// TODO Auto-generated method stub
+					avg =1.0*sum/cnt;
+					System.err.println("value:"+arg0.getValue());
+					//Result response = Result.newBuilder().setSum(sum).setCnt(cnt).setAvg(avg).build();
+					responseObserver.onNext(Result.newBuilder().setSum(sum).setCnt(cnt).setAvg(avg).build());
+					
 				}
 			};
 			
