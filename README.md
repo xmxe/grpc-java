@@ -12,6 +12,6 @@ protoc -I=F:\zz\grpc\src\resources\proto --plugin=protoc-gen-grpc-java=F:\protoc
 - 版本不一致 神坑~ protoc.exe要与protobuf-java.jar版本一致
 
 
-###
+### 相关文章
 
--[一个简单的案例入门gRPC](https://mp.weixin.qq.com/s/OyfU0tLm4f9t3nZxce-Ksw)
+- [一个简单的案例入门gRPC](https://mp.weixin.qq.com/s/OyfU0tLm4f9t3nZxce-Ksw)
