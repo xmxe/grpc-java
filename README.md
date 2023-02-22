@@ -17,3 +17,4 @@ protoc -I=F:\zz\grpc\src\resources\proto --plugin=protoc-gen-grpc-java=F:\protoc
 - [一个简单的案例入门gRPC](https://mp.weixin.qq.com/s/OyfU0tLm4f9t3nZxce-Ksw)
 - [聊一聊gRPC的四种通信模式](https://mp.weixin.qq.com/s/c-_D2RpLksIlYJDfaWOSkA)
 - [聊一聊gRPC中的拦截器](https://mp.weixin.qq.com/s/cxaa8uHQ1Qvjy9aDyV87GQ)
+- [手把手教大家在gRPC中使用JWT完成身份校验](https://mp.weixin.qq.com/s/jIZrP-H3DmS9pvRD5QaTfA)
