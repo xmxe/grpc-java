@@ -18,3 +18,4 @@ protoc -I=F:\zz\grpc\src\resources\proto --plugin=protoc-gen-grpc-java=F:\protoc
 - [聊一聊gRPC的四种通信模式](https://mp.weixin.qq.com/s/c-_D2RpLksIlYJDfaWOSkA)
 - [聊一聊gRPC中的拦截器](https://mp.weixin.qq.com/s/cxaa8uHQ1Qvjy9aDyV87GQ)
 - [手把手教大家在gRPC中使用JWT完成身份校验](https://mp.weixin.qq.com/s/jIZrP-H3DmS9pvRD5QaTfA)
+- [Spring Boot+Nacos+gRPC，一个区别于OpenFeign的微服务通信方案！](https://mp.weixin.qq.com/s/03aDYQ7_GV_O6scKYuIw1w)
